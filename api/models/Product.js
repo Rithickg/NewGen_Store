@@ -71,6 +71,10 @@ const productSchema = new mongoose.Schema({
             },
         }
     ],
+    attributes: {
+        type: Map,
+        of: String,
+    }
 }, { timestamps: true });
 
 export default mongoose.model("Product", productSchema)

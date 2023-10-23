@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import authRoute from './routes/auth.js'
 import productRoute from './routes/product.js'
+import discountRoute from './routes/discount.js'
 
 
 const app = express();
@@ -16,5 +17,6 @@ dotenv.config({ path: './configs/.env' });
 
 app.use('/api/auth', authRoute);
 app.use('/api/product', productRoute);
+app.use('/api/discount', discountRoute);
 
 export { app }
