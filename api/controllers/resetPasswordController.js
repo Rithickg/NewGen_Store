@@ -27,7 +27,11 @@ const requestPasswordReset = async (req, res) => {
         await newToken.save();
         const clientURL = process.env.CLIENT_URL;
         const resetLink = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
-        sendEmail(email, resetLink)
+        const emailData = {
+            name: user.name,
+            resetLink: resetLink
+        }
+        sendEmail(email, "Password Reset Request", "password-reset.ejs", emailData)
         res.status(200).json({ "message": "Password reset request success", "token": newToken })
     } catch (error) {
         res.status(500).json({ "message": error.message })
@@ -48,9 +52,13 @@ const resetPassword = async (req, res) => {
         }
         const salt = await bcrypt.genSalt(Number(process.env.BCRYPT_SALT));
         const hashedPassword = await bcrypt.hash(password, salt);
-        const newPassword = await User.findOneAndUpdate({ _id: id }, { password: hashedPassword });
+        await User.findOneAndUpdate({ _id: id }, { password: hashedPassword });
         const user = await User.findOne({ _id: id });
-        // await sendEmail(user.email, "Your password has been successfully changed");
+        const email = user.email;
+        const emailData = {
+            name: user.name
+        }
+        sendEmail(email, "Password Reset Success", "password-reset-success.ejs", emailData);
         await resetPasswordToken.deleteOne();
         res.status(200).json({ "message": "Password reset success" })
     } catch (error) {

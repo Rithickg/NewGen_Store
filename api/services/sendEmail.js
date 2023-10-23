@@ -2,10 +2,9 @@ import nodemailer from 'nodemailer';
 import ejs from 'ejs';
 import fs from 'fs';
 
-// Read and compile the HTML template (using EJS)
-const emailTemplate = ejs.compile(fs.readFileSync(`./views/password-reset.ejs`, 'utf8'));
 
-const sendEmail = (email, resetLink) => {
+const sendEmail = (email, subject, template, data) => {
+    console.log("Data", data)
     const gmail = process.env.GMAIL
     const gmail_pass = process.env.GMAIL_PASSWORD
     const transporter = nodemailer.createTransport({
@@ -15,17 +14,16 @@ const sendEmail = (email, resetLink) => {
             pass: gmail_pass
         }
     })
-    const html = emailTemplate({ username: "rithick", link: resetLink })
+
+    const emailTemplate = ejs.compile(fs.readFileSync(`./templates/${template}`, 'utf8'));
+    const htmlContent = emailTemplate(data)
 
     const message = {
         from: gmail,
         to: email,
-        subject: "Test subject",
-        text: "Test text",
-        html: html
-        // html: `<h1>Test html</h1>
-        //       <p>Test paragraph</p>
-        //       <a href=${resetLink}>Reset password</a>`
+        subject: subject,
+        text: subject,
+        html: htmlContent
     }
 
     transporter.sendMail(message, (error) => {
@@ -35,10 +33,6 @@ const sendEmail = (email, resetLink) => {
             console.log("Email successfully sent to :", email)
         }
     })
-
-    // let username = "rithick"
-    console.log(html)
-    console.log("Email sent, Success!")
 }
 
 export { sendEmail }

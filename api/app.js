@@ -12,8 +12,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 dotenv.config({ path: './configs/.env' });
-// Register view engine 
-app.set('view engine', 'ejs')
+
 
 app.use('/api/auth', authRoute);
 
