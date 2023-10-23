@@ -19,15 +19,16 @@ const requestPasswordReset = async (req, res) => {
         const resetToken = crypto.randomBytes(32).toString("hex");
         const salt = await bcrypt.genSalt(Number(process.env.BCRYPT_SALT));
         const hashedPassword = await bcrypt.hash(resetToken, salt);
-        await new Token({
+        const newToken = new Token({
             userId: user._id,
             token: hashedPassword,
             createdAt: Date.now(),
-        }).save();
-
-        // const resetLink = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
-        sendEmail(email)
-        res.status(200).json({ "message": "Password reset request success" })
+        })
+        await newToken.save();
+        const clientURL = process.env.CLIENT_URL;
+        const resetLink = `${clientURL}/passwordReset?token=${resetToken}&id=${user._id}`;
+        sendEmail(email, resetLink)
+        res.status(200).json({ "message": "Password reset request success", "token": newToken })
     } catch (error) {
         res.status(500).json({ "message": error.message })
     }
@@ -35,7 +36,26 @@ const requestPasswordReset = async (req, res) => {
 }
 
 const resetPassword = async (req, res) => {
-
+    try {
+        const { token, id, password } = req.body;
+        const resetPasswordToken = await Token.findOne({ userId: id });
+        if (!resetPasswordToken) {
+            res.status(400).json({ "message": "Invalid or expired password reset token dbtok" })
+        }
+        const isValid = await bcrypt.compare(token, resetPasswordToken.token);
+        if (!isValid) {
+            res.status(400).json({ "message": "Invalid or expired password reset token comtok" })
+        }
+        const salt = await bcrypt.genSalt(Number(process.env.BCRYPT_SALT));
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newPassword = await User.findOneAndUpdate({ _id: id }, { password: hashedPassword });
+        const user = await User.findOne({ _id: id });
+        // await sendEmail(user.email, "Your password has been successfully changed");
+        await resetPasswordToken.deleteOne();
+        res.status(200).json({ "message": "Password reset success" })
+    } catch (error) {
+        res.status(500).json({ "message": error.message })
+    }
 }
 
 export { requestPasswordReset, resetPassword }
