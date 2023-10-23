@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import ejs from 'ejs';
 import authRoute from './routes/auth.js'
+import productRoute from './routes/product.js'
 
 
 const app = express();
@@ -15,5 +15,6 @@ dotenv.config({ path: './configs/.env' });
 
 
 app.use('/api/auth', authRoute);
+app.use('/api/product', productRoute);
 
 export { app }
