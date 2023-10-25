@@ -51,44 +51,36 @@ const update_product_by_id = async (req, res) => {
 }
 
 const update_product_by_seller_id = async (req, res) => {
-    const { sellerId, productId } = req.params;
-    const { name, description, category, price, brand, imageUrls, stock, attributes } = req.body;
-    const product = await Product.findById({ _id: productId, seller: sellerId })
-    if (!product) {
-        return res.status(404).json({ error: "Product not found" })
-    }
-    const updateFields = { name, description, category, price, brand, imageUrls, stock, attributes }
-    const updatedProduct = await findByIdAndUpdate({ _id: productId, seller: sellerId }, updateFields, { new: true });
-    // product.name = req.body.name;
-    // product.description = req.body.description;
-    // product.category = req.body.category;
-    // product.price = req.body.price;
-    // product.brand = req.body.brand;
-    // product.imageUrls = req.body.imageUrls;
-    // product.stock = req.body.stock;
-    // product.attributes = req.body.attributes;
-
-
-    res.status(200).json(product)
-}
-
-const delete_product_by_id = async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id);
+        const { sellerId, productId } = req.params;
+        const { name, description, category, price, brand, imageUrls, stock, attributes } = req.body;
+        const product = await Product.findOne({ _id: productId, seller: sellerId })
         if (!product) {
-            return res.status(404).json({ error: "Product not found" });
+            return res.status(404).json({ error: "Product not found", err: err.message })
         }
-        await Product.findByIdAndDelete(req.params.id);
-        res.status(200).json({ message: "Product deleted successfully" });
+
+        product.name = name;
+        product.description = description;
+        product.category = category;
+        product.price = price;
+        product.brand = brand;
+        product.imageUrls = imageUrls;
+        product.stock = stock;
+        product.attributes = attributes;
+
+        await product.save();
+        res.status(200).json(product);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ error: err.message, "message": "Something went wrong" });
     }
 }
+
 
 const add_stock_by_id = async (req, res) => {
     const { sellerId, productId } = req.params;
 
     try {
+        const { stock } = req.body;
         const product = await Product.findOne({ _id: productId, seller: sellerId });
 
         if (!product) {
@@ -96,7 +88,7 @@ const add_stock_by_id = async (req, res) => {
         }
 
         if (req.body.stock !== undefined) {
-            product.stock = req.body.stock;
+            product.stock = stock;
         }
 
         await product.save();
@@ -108,5 +100,19 @@ const add_stock_by_id = async (req, res) => {
 }
 
 
-export { add_product, get_all_products, get_product_by_id, update_product_by_id, update_product_by_seller_id, delete_product_by_id, add_stock_by_id }
+const delete_product_by_id = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+        await Product.findByIdAndDelete(id);
+        res.status(200).json({ message: "Product deleted successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
+export { add_product, get_all_products, get_product_by_id, update_product_by_id, update_product_by_seller_id, add_stock_by_id, delete_product_by_id }
 
