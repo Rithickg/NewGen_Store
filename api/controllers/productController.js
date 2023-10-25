@@ -2,6 +2,9 @@ import Product from "../models/Product.js";
 
 const add_product = async (req, res) => {
     try {
+        // got the user from jwt token where user is _id 
+        const user = req.user
+        console.log("User", user)
         const { name, description, category, price, brand, imageUrls, ratings, stock, seller, reviews, attributes } = req.body;
         const product = new Product({ name, description, category, price, brand, imageUrls, ratings, stock, seller, reviews, attributes });
         await product.save();

@@ -15,6 +15,7 @@ const signup_user = async (req, res) => {
             const newUser = new User({ name, email, phone_number, password: hashedPassword });
             await newUser.save();
             const token = generateToken(newUser._id);
+            res.cookie('jwt-token', token, { httpOnly: true, maxAge: 3600000 });
             res.status(200).json({ User: newUser, token });
         }
     } catch (error) {
@@ -34,6 +35,7 @@ const signin_user = async (req, res) => {
             return res.status(401).json({ error: 'Unauthorized' });
         }
         const token = generateToken(existingUser._id);
+        res.cookie('jwt-token', token, { httpOnly: true, maxAge: 3600000 });
         res.status(200).json({ User: existingUser, token });
     } catch (error) {
         res.status(500).json({ error: error.message });
