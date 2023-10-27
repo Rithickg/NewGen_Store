@@ -1,13 +1,10 @@
-import './App.css'
-import SignIn from './pages/SignIn'
+import { Header } from "./components/Header"
 
-function App() {
+export const App = () => {
   return (
     <>
-      <h1>App</h1>
-      <SignIn />
+      <Header />
     </>
   )
 }
 
-export default App
