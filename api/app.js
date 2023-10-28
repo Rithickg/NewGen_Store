@@ -24,7 +24,7 @@ app.use(morgan('dev'));
 
 
 app.use('/api/auth', authRoute);
-app.use('/api/product', verifyToken, productRoute);
+app.use('/api/product', productRoute);
 app.use('/api/discount', verifyToken, discountRoute);
 
 export { app }

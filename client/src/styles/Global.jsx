@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     text-decoration: none;
     list-style: none;
+    user-select: none;
 }
 
 body{

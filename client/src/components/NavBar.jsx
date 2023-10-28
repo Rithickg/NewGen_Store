@@ -1,16 +1,20 @@
 import { SearchBar } from "./SearchBar"
+import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai'
+import { Nav, OrderList } from "../styles/NavBar.styled"
 
 export const NavBar = () => {
     return (
-        <nav>
+        <Nav>
             <span>NewGen</span>
             <SearchBar />
-            <ol>
+            <OrderList>
                 <li>Home</li>
                 <li>About</li>
                 <li>Contact</li>
                 <li>Sign Up</li>
-            </ol>
-        </nav>
+            </OrderList>
+            <AiOutlineHeart />
+            <AiOutlineShoppingCart />
+        </Nav>
     )
 }
