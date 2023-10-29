@@ -29,3 +29,16 @@ export const Input = styled.input`
     display: none;
   }
 `;
+
+export const SearchResult = styled.div`
+  width: 500px;
+  height: 300px;
+  background-color: red;
+  color: black;
+`
+
+export const List = styled.li`
+  list-style: none;
+  background-color: blue;
+  color: black;
+`

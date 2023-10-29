@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
     display: flex;
@@ -7,6 +8,7 @@ export const Nav = styled.nav`
     border-bottom: 1px solid black;
     padding: 1rem;
 `
+
 
 export const OrderList = styled.ol`
     display: flex;
@@ -18,6 +20,13 @@ export const OrderList = styled.ol`
     li:hover {
         cursor: pointer;
         text-decoration: underline;
+    }
+`
 
+export const LinkStyled = styled(Link)`
+    color: black;
+    &:hover {
+        text-decoration: underline;
+        color:red;
     }
 `

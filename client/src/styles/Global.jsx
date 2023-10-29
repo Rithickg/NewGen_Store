@@ -26,9 +26,6 @@ p{
 
 a{
     color: #fff;
-    &:hover{
-        color: red;
-    }
 }
 
 img{
