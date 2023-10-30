@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const SearchInput = styled.div`
     display: flex;
     text-align: center;
@@ -9,7 +14,7 @@ export const SearchInput = styled.div`
     border-radius: 5px;
     padding: 0 10px;
     margin: 0 10px;
-    width: 250px;
+    width: 500px;
     height: 30px;
     background-color: #f7f3f3;
 `;
@@ -31,14 +36,20 @@ export const Input = styled.input`
 `;
 
 export const SearchResult = styled.div`
+  position: absolute;
+  top:50px;
+  z-index: 1;
   width: 500px;
-  height: 300px;
-  background-color: red;
+  padding: 0 10px;
+  margin: 0 10px;
+  max-height: fit-content;
+  background-color: #d7c6c6;
   color: black;
 `
 
 export const List = styled.li`
   list-style: none;
-  background-color: blue;
+  background-color: #f7f3f3;
+  margin: 0.2rem;
   color: black;
 `

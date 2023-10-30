@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
     display: flex;
+    position: relative;
     flex-direction: row;
     justify-content: space-around;
     border-bottom: 1px solid black;
@@ -15,7 +16,7 @@ export const OrderList = styled.ol`
     flex-direction: row;
     justify-content: space-around;
     width: 50%;
-    margin: 0;
+    margin: 0.2rem;
     padding: 0;
     li:hover {
         cursor: pointer;

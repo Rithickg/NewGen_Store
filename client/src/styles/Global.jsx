@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     text-decoration: none;
-    list-style: none;
+    list-style: none; 
     user-select: none;
 }
 
@@ -16,8 +16,24 @@ body{
     color: #000;
     background: #fff;
     font-size: 1rem;
+
     font-family: 'Poppins', sans-serif;
 }
+
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE and Edge */
+  body::-ms-overflow-style {
+    display: none;
+  }
+
+  /* Hide scrollbar for Firefox */
+  body {
+    scrollbar-width: none;
+  }
 
 p{
     opacity: 0.6;
