@@ -36,7 +36,6 @@ body{
   }
 
 p{
-    opacity: 0.6;
     line-height: 1.5rem;
 }
 
