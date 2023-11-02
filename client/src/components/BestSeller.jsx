@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { getProducts } from "../utils/Fetcher"
 import TestImage from "../assets/featuredProduct/domino-164_6wVEHfI-unsplash.jpg"
+import { Link } from "react-router-dom"
 import { BestSellerContainer, BestSellerProduct, LinkStyled, BestSellerHeader, BestProduct, StyledImage } from "../styles/BestSeller.styled"
 
 export const BestSeller = () => {
@@ -17,10 +18,12 @@ export const BestSeller = () => {
             <BestSellerProduct>
                 {data.splice(0, 5).map((product) => (
                     <BestProduct key={product._id}>
-                        <StyledImage src={TestImage} alt={product.name} />
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p>&#x20B9;{product.price}</p>
+                        <Link to="/product">
+                            <StyledImage src={TestImage} alt={product.name} />
+                            <h3>{product.name}</h3>
+                            <p>{product.description}</p>
+                            <p>&#x20B9;{product.price}</p>
+                        </Link>
                     </BestProduct>
                 ))}
             </BestSellerProduct>

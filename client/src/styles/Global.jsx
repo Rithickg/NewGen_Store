@@ -40,7 +40,7 @@ p{
 }
 
 a{
-    color: #fff;
+    color: #000;
 }
 
 img{
