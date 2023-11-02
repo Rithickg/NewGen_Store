@@ -12,8 +12,6 @@ export const SliderImage = styled.img`
   height: 100%;
   object-fit: cover;
   position: absolute;
-  opacity: ${(props) => (props.active ? 1 : 0)};
-  transition: opacity 0.5s;
 `;
 
 export const Arrow = styled.div`
