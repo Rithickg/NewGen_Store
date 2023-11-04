@@ -1,18 +1,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getProducts } from '../utils/Fetcher';
-import axios from 'axios';
+import { getProductByPage } from '../utils/Fetcher';
+import { ExploreProductContainer, ExploreProductHeader, ExploreProducts, ExploreProductss, LinkStyled, ProductLink, StyledImage, LoadButton } from '../styles/ExploreProduct.styled';
+import TestImage from '../assets/featuredProduct/varun-gaba-dcgB3CgidlU-unsplash.jpg'
 
-const getProduct = async ({ pageParam = 0 }) => {
-    const res = await fetch(`http://localhost:2002/api/product/get-all-products?limit=10&offset=${pageParam}`);
-    const data = await res.json();
-    return { products: [...data], prevOffset: pageParam }
-    // const { data } = await axios.get(`http://localhost:2002/api/product/get-all-products?limit=10&offset=10`)
-    // return { product: data }
-}
+
 export const ExploreProduct = () => {
     const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
         queryKey: ['productByPage'],
-        queryFn: getProduct,
+        queryFn: getProductByPage,
         getNextPageParam: (lastPage) => {
             if (lastPage.products.length === 0) {
                 return undefined
@@ -28,23 +23,26 @@ export const ExploreProduct = () => {
     console.log("products", products)
 
     return (
-        <div>
-            <h1>ExploreProduct</h1>
-            <div>
+        <ExploreProductContainer>
+            <ExploreProductHeader>
+                <h1>Explore Products</h1>
+                <LinkStyled to="/products">View all</LinkStyled>
+            </ExploreProductHeader>
+            <ExploreProducts>
                 {products?.map((product) => {
                     return (
-                        <div key={product._id}>
-                            <h1>{product.name}</h1>
-                            <p>{product.description}</p>
-                            <p>{product.price}</p>
-                            <p>{product.category}</p>
-                            <p>{product.quantity}</p>
-                            <p>{product.sold}</p>
-                        </div>
+                        <ExploreProductss key={product._id}>
+                            <ProductLink to="/products">
+                                <StyledImage src={TestImage} alt={product.name} />
+                                <h3>{product.name}</h3>
+                                <p>{product.description}</p>
+                                <p>{product.price}</p>
+                            </ProductLink>
+                        </ExploreProductss>
                     )
                 })}
-            </div>
-            <button onClick={() => fetchNextPage()} disabled={!hasNextPage}>Load More</button>
-        </div>
+            </ExploreProducts>
+            <LoadButton onClick={() => fetchNextPage()} disabled={!hasNextPage}>Load More</LoadButton>
+        </ExploreProductContainer>
     )
 }

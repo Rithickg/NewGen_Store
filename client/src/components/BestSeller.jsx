@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { getProducts } from "../utils/Fetcher"
 import TestImage from "../assets/featuredProduct/domino-164_6wVEHfI-unsplash.jpg"
+
 import { Link } from "react-router-dom"
 import { BestSellerContainer, BestSellerProduct, LinkStyled, BestSellerHeader, BestProduct, StyledImage } from "../styles/BestSeller.styled"
 

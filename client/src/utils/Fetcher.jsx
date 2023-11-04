@@ -5,7 +5,7 @@ export const getProducts = async () => {
     return data
 }
 
-export const getProductByPage = async ({ pageParam = 1 }) => {
-    const { data } = await axios.get(`http://localhost:2002/api/product/get-all-products?page=${pageParam}`)
-    return data
+export const getProductByPage = async ({ pageParam = 0 }) => {
+    const { data } = await axios.get(`http://localhost:2002/api/product/get-all-products?limit=10&offset=${pageParam}`);
+    return { products: [...data], prevOffset: pageParam }
 }

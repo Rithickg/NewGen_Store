@@ -13,8 +13,8 @@ export const Header = () => {
             <OfferSale />
             <NavBar />
             <Slider />
-            <FeaturedProduct />
             <BestSeller />
+            <FeaturedProduct />
             <TopDeals />
             <ExploreProduct />
         </>
