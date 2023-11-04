@@ -16,11 +16,31 @@ const add_product = async (req, res) => {
 
 const get_all_products = async (req, res) => {
     try {
-        const products = await Product.find();
-        if (!products) {
-            return res.status(404).json({ error: "Products not found" })
+        let { limit, offset } = req.query;
+        if (limit || offset) {
+            limit = parseInt(limit) || 10; // Default to 10 if not provided
+            offset = parseInt(offset) || 0; // Default to 0 if not provided
+            const products = await Product.find()
+                .skip(offset)
+                .limit(limit);
+            if (!products) {
+                return res.status(404).json({ error: "Products not found" });
+            }
+            res.status(200).json(products);
         }
-        res.status(200).json(products);
+        else {
+            const products = await Product.find();
+            if (!products) {
+                return res.status(404).json({ error: "Products not found" })
+            }
+            res.status(200).json(products);
+        }
+
+        // const products = await Product.find();
+        // if (!products) {
+        //     return res.status(404).json({ error: "Products not found" })
+        // }
+        // res.status(200).json(products);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
