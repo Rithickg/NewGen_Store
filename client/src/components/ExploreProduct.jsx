@@ -32,7 +32,7 @@ export const ExploreProduct = () => {
                 {products?.map((product) => {
                     return (
                         <ExploreProductss key={product._id}>
-                            <ProductLink to="/products">
+                            <ProductLink to={`/${product._id}`}>
                                 <StyledImage src={TestImage} alt={product.name} />
                                 <h3>{product.name}</h3>
                                 <p>{product.description}</p>

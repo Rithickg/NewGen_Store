@@ -36,11 +36,6 @@ const get_all_products = async (req, res) => {
             res.status(200).json(products);
         }
 
-        // const products = await Product.find();
-        // if (!products) {
-        //     return res.status(404).json({ error: "Products not found" })
-        // }
-        // res.status(200).json(products);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

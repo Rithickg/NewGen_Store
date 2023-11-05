@@ -19,7 +19,7 @@ export const BestSeller = () => {
             <BestSellerProduct>
                 {data.splice(0, 5).map((product) => (
                     <BestProduct key={product._id}>
-                        <Link to="/product">
+                        <Link to={`/${product._id}`}>
                             <StyledImage src={TestImage} alt={product.name} />
                             <h3>{product.name}</h3>
                             <p>{product.description}</p>
@@ -28,7 +28,6 @@ export const BestSeller = () => {
                     </BestProduct>
                 ))}
             </BestSellerProduct>
-
         </BestSellerContainer>
     )
 }

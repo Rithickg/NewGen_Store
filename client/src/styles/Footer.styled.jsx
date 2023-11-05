@@ -3,18 +3,31 @@ import styled from 'styled-components';
 export const StyledFooter = styled.footer`
     background-color: #333;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
    padding: 10px 0;
 `
+export const FooterContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    margin: 0 auto;
+`
+export const FooterRights = styled.div`
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 0;
+    text-align: center;
+    color: #000;
+`
 export const FooterSection = styled.section`
-    max-width: 1000px;
     margin: 0 auto;
     padding: 20px 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     color: #fff;
 `
 export const Subscribe = styled.div`

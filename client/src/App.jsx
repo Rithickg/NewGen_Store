@@ -1,6 +1,9 @@
 import { Header } from "./components/Header"
 import { useQuery } from "@tanstack/react-query"
 import { getProducts } from "./utils/Fetcher"
+import { NavBar } from "./components/NavBar"
+import { Footer } from "./components/Footer"
+import { OfferSale } from "./components/OfferSale"
 
 
 export const App = () => {
@@ -16,14 +19,10 @@ export const App = () => {
 
   return (
     <>
+      <OfferSale />
+      <NavBar />
       <Header />
-      {data.map((product) => (
-        <div key={product.id}>
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
-          <p>{product.price}</p>
-        </div>
-      ))}
+      <Footer />
     </>
   )
 }
