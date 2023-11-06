@@ -6,7 +6,7 @@ import { ErrorPage } from './pages/ErrorPage.jsx'
 import { GlobalStyles } from './styles/Global.jsx'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { Product } from './components/Product.jsx'
+import { ProductPage } from './components/ProductPage.jsx'
 
 
 const queryClient = new QueryClient()
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/:productId',
-    element: <Product />
+    element: <ProductPage />
   }
 ])
 
