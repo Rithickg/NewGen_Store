@@ -5,7 +5,6 @@ import { NavBar } from "./components/NavBar"
 import { Footer } from "./components/Footer"
 import { OfferSale } from "./components/OfferSale"
 
-
 export const App = () => {
 
   const { isPending, error, data } = useQuery({

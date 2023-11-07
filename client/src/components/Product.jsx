@@ -2,7 +2,9 @@ import { useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { getProductById } from "../utils/Fetcher"
 import { useState } from "react"
-import { ProductContainer, ImageContainer, ProductDetails, ActiveImage } from "../styles/Product.styled"
+import { ProductContainer, ImageContainer, ProductDetails, ActiveImage, BuySection, Button, ProductImage, ProductImageCollection } from "../styles/Product.styled"
+import { AiOutlineShoppingCart } from "react-icons/ai"
+import { IoIosFlash } from "react-icons/io"
 
 
 export const Product = () => {
@@ -36,22 +38,27 @@ export const Product = () => {
     return (
         <ProductContainer>
             <ImageContainer>
-                <div>
-                    {productImage.imageUrls.map((img, index) => {
-                        console.log("img", { img: index })
-                        return (
-                            <div key={index} onMouseEnter={() => setActiveImage(index)} style={{
-                                border: `1px solid ${activeImage === index ? 'red' : 'white'}`,
-                            }}>
-                                <img src={img} alt={`Product image ${index}`} />
-                            </div>
-                        )
-                    })}
-                </div>
-                <div>
-                    <h1>Active Image</h1>
-                    <ActiveImage src={productImage.imageUrls[activeImage]} alt="Product image" />
-                </div>
+                <ProductImage>
+                    <ProductImageCollection>
+                        {productImage.imageUrls.map((img, index) => {
+                            console.log("img", { img: index })
+                            return (
+                                <div key={index} onMouseEnter={() => setActiveImage(index)} style={{
+                                    border: `1px solid ${activeImage === index ? 'red' : 'white'}`,
+                                }}>
+                                    <img src={img} alt={`Product image ${index}`} />
+                                </div>
+                            )
+                        })}
+                    </ProductImageCollection>
+                    <div>
+                        <ActiveImage src={productImage.imageUrls[activeImage]} alt="Product image" />
+                    </div>
+                </ProductImage>
+                <BuySection>
+                    <Button><AiOutlineShoppingCart /> Add to cart</Button>
+                    <Button><IoIosFlash /> Buy Now</Button>
+                </BuySection>
             </ImageContainer>
             <ProductDetails>
                 <h2>{data.name}</h2>
@@ -90,9 +97,6 @@ export const Product = () => {
                     ))}
                 </ul>
             </ProductDetails>
-            <div>
-
-            </div>
         </ProductContainer>
     )
 }

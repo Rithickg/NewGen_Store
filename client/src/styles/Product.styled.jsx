@@ -3,32 +3,35 @@ import styled from "styled-components";
 export const ProductContainer = styled.div`
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
-    /* align-items: center; */
+    background-color: #d8d6d6;
     margin: 1rem;
     `;
 
 export const ImageContainer = styled.div`
     display: flex;
-    /* justify-content: space-between; */
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    width: 50%;
+    width: 40%;
     margin: 1rem;
-    div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        div {
-        margin: 1rem;
-        img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        }
-    }
     `;
+
+export const ProductImage = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    `;
+export const ProductImageCollection = styled.div`
+    margin: 1rem;
+    width: 60px;
+    img{
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+`
 export const ActiveImage = styled.img`
     width: 400px;
     height: 400px;
@@ -38,9 +41,25 @@ export const ActiveImage = styled.img`
 
 export const ProductDetails = styled.div`
     display: flex;
-    width: 50%;
+    width: 60%;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center;  */
     margin: 1rem;
+    `;
+
+export const BuySection = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 1rem;
+    `;
+
+export const Button = styled.button`
+    width: 100%;
+    height: 2rem;
+    margin: 0.3rem;
+    background-color: #f0c040;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
     `;
