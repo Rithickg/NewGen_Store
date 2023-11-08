@@ -5,6 +5,8 @@ import { useState } from "react"
 import { ProductContainer, ImageContainer, ProductDetails, ActiveImage, BuySection, Button, ProductImage, ProductImageCollection } from "../styles/Product.styled"
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import { IoIosFlash } from "react-icons/io"
+import { useSelector, useDispatch } from "react-redux"
+import { addToCart } from "../globalState/features/cart/cartSlice"
 
 
 export const Product = () => {
@@ -16,6 +18,19 @@ export const Product = () => {
     })
     console.log("data-return", data)
     const [activeImage, setActiveImage] = useState(0)
+
+    const cart = useSelector((state) => state.cart.cartItems)
+    console.log("Cart", cart)
+    const dispatch = useDispatch()
+
+    const handleAddToCart = () => {
+        const product = { productId: data._id, quantity: 1 }
+        dispatch(addToCart(product))
+    }
+
+    const handleBuyNow = () => {
+
+    }
 
 
     if (isPending) return 'Loading...'
@@ -56,8 +71,8 @@ export const Product = () => {
                     </div>
                 </ProductImage>
                 <BuySection>
-                    <Button><AiOutlineShoppingCart /> Add to cart</Button>
-                    <Button><IoIosFlash /> Buy Now</Button>
+                    <Button onClick={handleAddToCart}><AiOutlineShoppingCart /> Add to cart</Button>
+                    <Button onClick={handleBuyNow}><IoIosFlash /> Buy Now</Button>
                 </BuySection>
             </ImageContainer>
             <ProductDetails>

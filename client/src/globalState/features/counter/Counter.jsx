@@ -9,8 +9,8 @@ export const Counter = () => {
             <h1>Counter</h1>
             <h3>{count}</h3>
             <div>
-                <button onClick={() => dispatch(increment)}>+</button>
-                <button onClick={() => dispatch(decrement)}>-</button>
+                <button onClick={() => dispatch(increment())}>+</button>
+                <button onClick={() => dispatch(decrement())}>-</button>
 
             </div>
         </div>
