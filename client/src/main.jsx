@@ -10,6 +10,8 @@ import { ProductPage } from './components/ProductPage.jsx'
 import { store } from './globalState/store.jsx'
 import { Provider } from 'react-redux'
 import { Cart } from './components/Cart.jsx'
+import { SignUp } from './pages/SignUp.jsx'
+import { SignIn } from './pages/SignIn.jsx'
 
 
 const queryClient = new QueryClient()
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />
+  },
+  {
+    path: '/signin',
+    element: <SignIn />
   },
   {
     path: '/:productId',
