@@ -1,15 +1,16 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { getProductById } from "../utils/Fetcher"
 import { useState } from "react"
-import { ProductContainer, ImageContainer, ProductDetails, ActiveImage, BuySection, Button, ProductImage, ProductImageCollection } from "../styles/Product.styled"
-import { AiOutlineShoppingCart } from "react-icons/ai"
+import { ProductContainer, ImageContainer, ProductDetails, ActiveImage, BuySection, Button, ProductImage, ProductImageCollection, WishListButton } from "../styles/Product.styled"
+import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai"
 import { IoIosFlash } from "react-icons/io"
 import { useSelector, useDispatch } from "react-redux"
 import { addToCart } from "../globalState/features/cart/cartSlice"
 
 
 export const Product = () => {
+    const navigate = useNavigate()
     const { productId } = useParams()
     const { data, isPending, error } = useQuery({
         queryKey: ['productById', { productId }],
@@ -18,6 +19,7 @@ export const Product = () => {
     })
     console.log("data-return", data)
     const [activeImage, setActiveImage] = useState(0)
+    const [isCartActive, setIsCartActive] = useState(false)
 
     const cart = useSelector((state) => state.cart.cartItems)
     console.log("Cart", cart)
@@ -26,12 +28,16 @@ export const Product = () => {
     const handleAddToCart = () => {
         const product = { productId: data._id, quantity: 1 }
         dispatch(addToCart(product))
+        setIsCartActive(true)
     }
 
     const handleBuyNow = () => {
 
     }
 
+    const handleGoToCart = () => {
+        navigate('/cart')
+    }
 
     if (isPending) return 'Loading...'
 
@@ -71,8 +77,14 @@ export const Product = () => {
                     </div>
                 </ProductImage>
                 <BuySection>
-                    <Button onClick={handleAddToCart}><AiOutlineShoppingCart /> Add to cart</Button>
+                    {isCartActive ? (
+                        <Button onClick={handleGoToCart}><AiOutlineShoppingCart /> Go to cart</Button>
+                    ) : (
+                        <Button onClick={handleAddToCart}><AiOutlineShoppingCart /> Add to cart</Button>
+                    )}
                     <Button onClick={handleBuyNow}><IoIosFlash /> Buy Now</Button>
+                    <WishListButton><AiOutlineHeart /></WishListButton>
+
                 </BuySection>
             </ImageContainer>
             <ProductDetails>

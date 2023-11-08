@@ -63,3 +63,13 @@ export const Button = styled.button`
     border-radius: 5px;
     cursor: pointer;
     `;
+
+export const WishListButton = styled.button`
+    width: 4rem;
+    height: 2rem;
+    margin: 0.3rem;
+    /* background-color: #f0c040; */
+    /* border: 1px solid black; */
+    /* border-radius: 5px; */
+    cursor: pointer;
+    `;

@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ProductPage } from './components/ProductPage.jsx'
 import { store } from './globalState/store.jsx'
 import { Provider } from 'react-redux'
-import { Counter } from './globalState/features/counter/Counter.jsx'
+import { Cart } from './components/Cart.jsx'
 
 
 const queryClient = new QueryClient()
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
     element: <ProductPage />
   },
   {
-    path: '/counter',
-    element: <Counter />
+    path: '/cart',
+    element: <Cart />
   }
 ])
 
