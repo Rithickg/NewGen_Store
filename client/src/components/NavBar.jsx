@@ -11,7 +11,7 @@ export const NavBar = () => {
                 <li><LinkStyled to="/">Home</LinkStyled></li>
                 <li><LinkStyled to="/about">About</LinkStyled></li>
                 <li><LinkStyled to="/contact">Contact</LinkStyled></li>
-                <li><LinkStyled to="/sign-up">Sign Up</LinkStyled></li>
+                <li><LinkStyled to="/signup">Sign Up</LinkStyled></li>
             </OrderList>
             <AiOutlineHeart />
             <AiOutlineShoppingCart />

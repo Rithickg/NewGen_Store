@@ -16,3 +16,13 @@ export const getProductById = async (queryKey) => {
     console.log("data", data)
     return data
 }
+
+export const signUpUser = async (values) => {
+    const { data } = await axios.post("http://localhost:2002/api/auth/sign-up", values)
+    return data
+}
+
+export const signInUser = async (values) => {
+    const { data } = await axios.post("http://localhost:2002/api/auth/sign-in", values)
+    return data
+}
