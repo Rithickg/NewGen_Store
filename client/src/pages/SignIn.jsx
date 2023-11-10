@@ -6,6 +6,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { signInUser } from "../utils/Fetcher"
 import SignInPageImg from "../assets/ecommerce/Ecommerce-web-page-pana.svg"
+import { Container, Wrapper, ContentWrapper, Title, Image, FormWrapper, FormTitle, Input, ErrorMessage, SignUpLink, SignInButton } from '../styles/SignIn.Styled';
 
 const schema = yup.object().shape({
     email: yup.string().email().required("Email is required"),
@@ -50,30 +51,31 @@ export const SignIn = () => {
         }
     }
     return (
-        <div>
-            <div>
-                <h2>Welcome to NewGen Store</h2>
-                <img src={SignInPageImg} alt="NewGen Store" width="300" height="300" />
-            </div>
-            <div>
-                <h2>Sign In</h2>
-                <form onSubmit={handleSubmit(handleSignIn)}>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input type="text" id="email" {...register("email")} />
-                        {errors.email && <p>{errors.email.message}</p>}
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" {...register("password")} />
-                        {errors.password && <p>{errors.password.message}</p>}
-                    </div>
-                    <p>Don&rsquo;t have an account? <Link to="/signup">Sign Up</Link></p>
+        <Container>
+            <Wrapper>
+                <ContentWrapper>
+                    <Title>Welcome to NewGen Store</Title>
+                    <Image src={SignInPageImg} alt="NewGen Store" width="300" height="300" />
+                </ContentWrapper>
+                <FormWrapper>
+                    <FormTitle>Sign In</FormTitle>
+                    <form onSubmit={handleSubmit(handleSignIn)}>
+                        <div>
+                            <label htmlFor="email">Email</label>
+                            <Input type="text" id="email" {...register("email")} />
+                            <ErrorMessage>{errors.email?.message}</ErrorMessage>
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password</label>
+                            <Input type="password" id="password" {...register("password")} />
+                            <ErrorMessage>{errors.password?.message}</ErrorMessage>
+                        </div>
+                        <SignUpLink>Don&rsquo;t have an account? <Link to="/signup">Sign Up</Link></SignUpLink>
 
-                    <button type="submit">Sign In</button>
-                </form>
-            </div>
-
-        </div >
+                        <SignInButton type="submit">Sign In</SignInButton>
+                    </form>
+                </FormWrapper>
+            </Wrapper>
+        </Container>
     )
 }
