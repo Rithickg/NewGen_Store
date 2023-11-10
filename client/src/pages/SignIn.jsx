@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { signInUser } from "../utils/Fetcher"
+import SignInPageImg from "../assets/ecommerce/Ecommerce-web-page-pana.svg"
 
 const schema = yup.object().shape({
     email: yup.string().email().required("Email is required"),
@@ -50,22 +51,29 @@ export const SignIn = () => {
     }
     return (
         <div>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit(handleSignIn)}>
-                <div>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" id="email" {...register("email")} />
-                    {errors.email && <p>{errors.email.message}</p>}
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" {...register("password")} />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </div>
-                <p>Don&rsquo;t have an account? <Link to="/signup">Sign Up</Link></p>
+            <div>
+                <h2>Welcome to NewGen Store</h2>
+                <img src={SignInPageImg} alt="NewGen Store" width="300" height="300" />
+            </div>
+            <div>
+                <h2>Sign In</h2>
+                <form onSubmit={handleSubmit(handleSignIn)}>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <input type="text" id="email" {...register("email")} />
+                        {errors.email && <p>{errors.email.message}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" {...register("password")} />
+                        {errors.password && <p>{errors.password.message}</p>}
+                    </div>
+                    <p>Don&rsquo;t have an account? <Link to="/signup">Sign Up</Link></p>
 
-                <button type="submit">Sign In</button>
-            </form>
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+
         </div >
     )
 }

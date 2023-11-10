@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { signUpUser } from '../utils/Fetcher';
 import { useCookies } from "react-cookie"
+import SignInPageImg from "../assets/ecommerce/Ecommerce-web-page-pana.svg"
+
 
 const schema = yup.object().shape({
     name: yup.string().min(2).required("Name is required"),
@@ -60,26 +62,33 @@ export const SignUp = () => {
     }
     return (
         <div>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit(handleSignUp)} noValidate>
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" {...register("name")} />
-                <p>{errors.name?.message}</p>
-                <label htmlFor='email'>Email</label>
-                <input type="email" id='email' name="email" {...register("email")} />
-                <p>{errors.email?.message}</p>
-                <label htmlFor='phone_number'>Phone Number</label>
-                <input type="number" id='phone_number' name="phone_number" {...register("phone_number")} />
-                <p>{errors.phone_number?.message}</p>
-                <label htmlFor='password'>Password</label>
-                <input type="password" id='password' name="password" {...register("password")} />
-                <p>{errors.password?.message}</p>
-                <label htmlFor='confirm_password'>Confirm Password</label>
-                <input type="password" id='confirm_password' name="confirmPassword" {...register("confirmPassword")} />
-                <p>{errors.confirmPassword?.message}</p>
-                <p>Already have an account?<Link to="/signin"> SignIn</Link></p>
-                <button type="submit">Sign Up</button>
-            </form>
+            <div>
+                <h2>Welcome to NewGen Store</h2>
+                <img src={SignInPageImg} alt="NewGen Store" width="300" height="300" />
+            </div>
+            <div>
+                <h1>Sign Up</h1>
+                <form onSubmit={handleSubmit(handleSignUp)} noValidate>
+                    <label htmlFor="name">Name</label>
+                    <input type="text" id="name" name="name" {...register("name")} />
+                    <p>{errors.name?.message}</p>
+                    <label htmlFor='email'>Email</label>
+                    <input type="email" id='email' name="email" {...register("email")} />
+                    <p>{errors.email?.message}</p>
+                    <label htmlFor='phone_number'>Phone Number</label>
+                    <input type="number" id='phone_number' name="phone_number" {...register("phone_number")} />
+                    <p>{errors.phone_number?.message}</p>
+                    <label htmlFor='password'>Password</label>
+                    <input type="password" id='password' name="password" {...register("password")} />
+                    <p>{errors.password?.message}</p>
+                    <label htmlFor='confirm_password'>Confirm Password</label>
+                    <input type="password" id='confirm_password' name="confirmPassword" {...register("confirmPassword")} />
+                    <p>{errors.confirmPassword?.message}</p>
+                    <p>Already have an account?<Link to="/signin"> SignIn</Link></p>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+
         </div>
     )
 }

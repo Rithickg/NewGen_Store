@@ -3,10 +3,10 @@ import { getCartItems, addToCart, deleteCartItem, updateCartItem } from "../cont
 
 const router = express.Router();
 
-router.get("/cart", getCartItems);
-router.post("/add-to-cart/:productId", addToCart);
+router.get("/get-cart", getCartItems);
+router.post("/add-cart/:productId", addToCart);
 router.post("/update-cart/:productId", updateCartItem);
-router.post("/remove-from-cart/:productId", deleteCartItem);
+router.post("/remove-cart/:productId", deleteCartItem);
 
 export default router;
 
